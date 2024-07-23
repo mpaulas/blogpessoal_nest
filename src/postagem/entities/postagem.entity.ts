@@ -1,3 +1,4 @@
+import { Transform, TransformFnParams } from "class-transformer";
 import { IsNotEmpty } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -6,6 +7,8 @@ export class Postagem{
 
     @PrimaryGeneratedColumn() // Decorador sempre em cima do atribudo, nesse caso id, Gera chave primária autoincremental.
     id: number;
+
+    @Transform(({ value }: TransformFnParams) => value?.trim()) // Bloquear apenas espaços em branco
 
     @IsNotEmpty() // Não aceita titulo vazio
     @Column({length: 100, nullable: false}) // Define tamanho e não aceita null

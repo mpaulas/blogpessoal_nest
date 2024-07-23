@@ -14,6 +14,7 @@ import { PostagemModule } from './postagem/postagem.module';
       database: 'db_blogpessoal',
       entities: [Postagem],
       synchronize: true,
+      logging: true, // Mostra instrução SQL que TypeOrm Gera quando se faz uma consulta
     }),
     PostagemModule
   ],
