@@ -1,6 +1,7 @@
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Tema } from "../../tema/entities/tema.entity";
 
 @Entity({ name: "tb_postagens"}) // Se não acrescentar essa entidade, o código vai gerar o nome da tabela igual o da classe. Cria tabela
 export class Postagem{
@@ -21,4 +22,10 @@ export class Postagem{
     @UpdateDateColumn() // A data e hora são preenchidos automaticamente
     data: Date;
 
+    // Muitos para Um, ou seja, muitas postagens possuem um tema
+    @ManyToOne(() => Tema, (tema) => tema.postagem,{
+        onDelete: "CASCADE"
+    })
+    tema: Tema;
+    
 }
