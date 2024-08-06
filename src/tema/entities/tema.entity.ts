@@ -17,8 +17,7 @@ export class Tema {
     @ApiProperty()
     descricao: string
     
-    
-    @OneToMany(() => Postagem, (postagem) => postagem.tema)
     @ApiProperty()
+    @OneToMany(() => Postagem, (postagem) => postagem.tema)
     postagem: Postagem[]
 }

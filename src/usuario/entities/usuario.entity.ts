@@ -34,8 +34,8 @@ export class Usuario {
     @ApiProperty() 
     foto: string
 
+    @ApiProperty()
     @OneToMany(() => Postagem, (postagem) => postagem.usuario)
-    @ApiProperty() 
     postagem: Postagem[]
 
 }
