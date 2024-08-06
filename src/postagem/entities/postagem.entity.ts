@@ -28,15 +28,17 @@ export class Postagem{
     @UpdateDateColumn() // A data e hora são preenchidos automaticamente
     data: Date;
 
-    @ApiProperty()
+    
     @ManyToOne(() => Tema, (tema) => tema.postagem,{ // Muitos para Um, ou seja, muitas postagens possuem um tema
         onDelete: "CASCADE"
     })
+    @ApiProperty()
     tema: Tema;
     
-    @ApiProperty()
+    
     @ManyToOne(() => Usuario, (usuario) => usuario.postagem,{
         onDelete: "CASCADE"
     })
+    @ApiProperty()
     usuario: Usuario;
 }
