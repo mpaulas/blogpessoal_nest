@@ -4,20 +4,19 @@ import { Postagem } from "../../postagem/entities/postagem.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { Transform, TransformFnParams } from "class-transformer";
 
-@Entity({name: "tb_temas"})
+@Entity({ name: "tb_temas" })
 export class Tema {
-
     @PrimaryGeneratedColumn()
     @ApiProperty()
-    id: number
+    public id: number;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    @Column({length: 255, nullable: false})
+    @Column({ length: 255, nullable: false })
     @ApiProperty()
-    descricao: string
-    
-    
-    @OneToMany(() => Postagem, (postagem) => postagem.tema)
-    postagem: Postagem[];
+    public descricao: string;
+
+    @OneToMany(() => Postagem, postagem => postagem.tema)
+    @ApiProperty({ type: () => Postagem })
+    public postagens: Postagem[];
 }

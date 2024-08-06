@@ -5,37 +5,37 @@ import { Tema } from "../../tema/entities/tema.entity";
 import { Usuario } from "../../usuario/entities/usuario.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
-@Entity({name: "tb_postagens"})
+@Entity({ name: "tb_postagens" })
 export class Postagem {
     @PrimaryGeneratedColumn()
-    @ApiProperty() 
-    id: number;
+    @ApiProperty()
+    public id: number;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    @Column({length: 100, nullable:false})
-    @ApiProperty() 
-    titulo: string;
+    @Column({ length: 100, nullable: false })
+    @ApiProperty()
+    public titulo: string;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    @Column({length: 100, nullable:false})
-    @ApiProperty() 
-    texto: string;
+    @Column({ length: 100, nullable: false })
+    @ApiProperty()
+    public texto: string;
 
     @UpdateDateColumn()
-    @ApiProperty() 
-    data: Date;
+    @ApiProperty()
+    public data: Date;
 
-    @ApiProperty() 
-    @ManyToOne(() => Tema, (tema) => tema.postagem, {
+    @ManyToOne(() => Tema, tema => tema.postagens, {
         onDelete: "CASCADE"
     })
-    tema: Tema;
+    @ApiProperty({ type: () => Tema })
+    public tema: Tema;
 
-    @ApiProperty() 
-    @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+    @ManyToOne(() => Usuario, usuario => usuario.postagens, {
         onDelete: "CASCADE"
     })
-    usuario: Usuario;
+    @ApiProperty({ type: () => Usuario })
+    public usuario: Usuario;
 }
