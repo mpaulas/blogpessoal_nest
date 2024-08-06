@@ -27,13 +27,13 @@ export class Postagem {
     @ApiProperty() 
     data: Date;
 
-    @ApiProperty()
+    @ApiProperty({type: () => Tema})
     @ManyToOne(() => Tema, (tema) => tema.postagem,{ // Muitos para Um, ou seja, muitas postagens possuem um tema
         onDelete: "CASCADE"
     })
     tema: Tema;
     
-    @ApiProperty()
+    @ApiProperty({type: () => Usuario})
     @ManyToOne(() => Usuario, (usuario) => usuario.postagem,{
         onDelete: "CASCADE"
     })
