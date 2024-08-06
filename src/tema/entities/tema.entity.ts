@@ -2,6 +2,7 @@ import { IsNotEmpty } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Postagem } from "../../postagem/entities/postagem.entity";
 import { ApiProperty } from "@nestjs/swagger";
+import { Transform, TransformFnParams } from "class-transformer";
 
 @Entity({name: "tb_temas"})
 export class Tema {
@@ -10,6 +11,7 @@ export class Tema {
     @ApiProperty()
     id: number
 
+    @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
     @Column({length: 255, nullable: false})
     @ApiProperty()

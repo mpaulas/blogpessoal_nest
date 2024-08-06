@@ -8,7 +8,8 @@ import { ApiProperty } from "@nestjs/swagger";
 @Entity({name: "tb_usuarios"})
 export class Usuario {
 
-    @PrimaryGeneratedColumn() 
+    @PrimaryGeneratedColumn()
+    @ApiProperty()
     public id: number
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
@@ -34,7 +35,6 @@ export class Usuario {
     @ApiProperty()
     public foto: string
 
-    
     @OneToMany(() => Postagem, (postagem) => postagem.usuario)
     @ApiProperty()
     postagem: Postagem[]
