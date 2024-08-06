@@ -5,27 +5,26 @@ import { Tema } from "../../tema/entities/tema.entity";
 import { Usuario } from "../../usuario/entities/usuario.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
-@Entity({ name: "tb_postagens"}) // Se não acrescentar essa entidade, o código vai gerar o nome da tabela igual o da classe. Cria tabela
-export class Postagem{
-
-    @ApiProperty()
-    @PrimaryGeneratedColumn() // Decorador sempre em cima do atribudo, nesse caso id, Gera chave primária autoincremental.
+@Entity({name: "tb_postagens"})
+export class Postagem {
+    @PrimaryGeneratedColumn()
+    @ApiProperty() 
     id: number;
 
-    @Transform(({ value }: TransformFnParams) => value?.trim()) // Bloquear apenas espaços em branco
-
-    @ApiProperty()
-    @IsNotEmpty() // Não aceita titulo vazio
-    @Column({length: 100, nullable: false}) // Define tamanho e não aceita null
+    @Transform(({ value }: TransformFnParams) => value?.trim())
+    @IsNotEmpty()
+    @Column({length: 100, nullable:false})
+    @ApiProperty() 
     titulo: string;
 
-    @ApiProperty()
+    @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    @Column({length: 1000, nullable: false})
+    @Column({length: 100, nullable:false})
+    @ApiProperty() 
     texto: string;
 
-    @ApiProperty()
-    @UpdateDateColumn() // A data e hora são preenchidos automaticamente
+    @UpdateDateColumn()
+    @ApiProperty() 
     data: Date;
 
     
